@@ -108,7 +108,7 @@ public class IMTServiceImpl implements IMTService {
         Map<String, Object> data = new HashMap<>();
         var timespan = System.currentTimeMillis();
         data.put("mobile", mobile);
-        data.put("md5", signature(mobile),timespan);
+        data.put("md5", signature(mobile,timespan));
         data.put("timestamp", String.valueOf(timespan));
 //        data.put("MT-APP-Version", MT_VERSION);
 
