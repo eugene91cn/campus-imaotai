@@ -640,5 +640,23 @@ public class IMTServiceImpl implements IMTService {
         return md5;
     }
 
+    private static String signature(String content,long ts) {
+
+        String text = SALT + content + ts;
+        String md5 = "";
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hashBytes = md.digest(text.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            md5 = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return md5;
+    }
+
 
 }
