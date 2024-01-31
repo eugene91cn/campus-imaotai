@@ -106,9 +106,10 @@ public class IMTServiceImpl implements IMTService {
     @Override
     public Boolean sendCode(String mobile, String deviceId) {
         Map<String, Object> data = new HashMap<>();
+        var timespan = System.currentTimeMillis();
         data.put("mobile", mobile);
-        data.put("md5", signature(mobile));
-        data.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        data.put("md5", signature(mobile),timespan);
+        data.put("timestamp", String.valueOf(timespan));
 //        data.put("MT-APP-Version", MT_VERSION);
 
         HttpRequest request = HttpUtil.createRequest(Method.POST,
