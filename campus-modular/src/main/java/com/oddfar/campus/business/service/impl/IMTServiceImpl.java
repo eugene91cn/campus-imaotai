@@ -139,12 +139,15 @@ public class IMTServiceImpl implements IMTService {
     @Override
     public boolean login(String mobile, String code, String deviceId) {
         Map<String, String> map = new HashMap<>();
+        
+        long timespan = System.currentTimeMillis();
+        
         map.put("mobile", mobile);
         map.put("vCode", code);
 
-        map.put("md5", signature(mobile + code + "" + ""));
+        map.put("md5", signature(mobile + code + "" + "",timespan));
 
-        map.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        map.put("timestamp", String.valueOf(timespan));
         map.put("MT-APP-Version", getMTVersion());
 
         HttpRequest request = HttpUtil.createRequest(Method.POST,
@@ -622,24 +625,6 @@ public class IMTServiceImpl implements IMTService {
      * @param content
      * @return
      */
-    private static String signature(String content) {
-
-        String text = SALT + content + System.currentTimeMillis();
-        String md5 = "";
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] hashBytes = md.digest(text.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            md5 = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return md5;
-    }
-
     private static String signature(String content,long ts) {
 
         String text = SALT + content + ts;
