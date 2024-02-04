@@ -556,9 +556,9 @@ public class IMTServiceImpl implements IMTService {
 
     public JSONObject reservation(IUser iUser, String itemId, String shopId) {
         
-        // 生成随机秒数 
-        int randomSecond = random.nextInt(60000);
-        Thread.sleep(randomSecond);
+        // 生成随机毫秒数 
+        int randomMillisecond = random.nextInt(60000);
+        Thread.sleep(randomMillisecond);
         
         Map<String, Object> map = new HashMap<>();
         JSONArray itemArray = new JSONArray();
