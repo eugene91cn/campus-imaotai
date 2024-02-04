@@ -478,6 +478,23 @@ public class IMTServiceImpl implements IMTService {
 
         for (IUser iUser : iUsers) {
             logger.info("「开始预约用户」" + iUser.getMobile());
+            
+            //随机延时
+            try{
+                Random random = new Random();
+                // 生成随机秒数 
+                int randomSecond = random.nextInt(60);
+                logger.info("「随机延时」" + randomSecond+" 秒");
+                Thread.sleep(randomSecond*1000);
+                
+                // 生成随机毫秒数 
+                int randomMillisecond = random.nextInt(1000);       
+                logger.info("「随机延时」" + randomMillisecond+" 毫秒");
+                Thread.sleep(randomMillisecond);
+            }catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
             //预约
             reservation(iUser);
             //延时3秒
@@ -556,20 +573,6 @@ public class IMTServiceImpl implements IMTService {
     }
 
     public JSONObject reservation(IUser iUser, String itemId, String shopId) {
-
-        try{
-            Random random = new Random();
-            // 生成随机秒数 
-            int randomSecond = random.nextInt(60);
-            Thread.sleep(randomSecond*1000);
-            // 生成随机毫秒数 
-            int randomMillisecond = random.nextInt(1000);        
-            Thread.sleep(randomMillisecond);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        
-        
         Map<String, Object> map = new HashMap<>();
         JSONArray itemArray = new JSONArray();
         Map<String, Object> info = new HashMap<>();
