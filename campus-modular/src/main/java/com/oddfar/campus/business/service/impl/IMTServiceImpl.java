@@ -559,10 +559,11 @@ public class IMTServiceImpl implements IMTService {
         
         // 生成随机秒数 
         int randomSecond = random.nextInt(60);
-        Thread.sleep(randomSecond);
+        Thread.sleep(randomSecond*1000);
         // 生成随机毫秒数 
         int randomMillisecond = random.nextInt(1000);        
-        Thread.sleep(randomSecond*1000+randomMillisecond);
+        Thread.sleep(randomMillisecond);
+        
         
         Map<String, Object> map = new HashMap<>();
         JSONArray itemArray = new JSONArray();
