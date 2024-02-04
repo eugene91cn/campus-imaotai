@@ -40,6 +40,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Random;
 
 @Service
 public class IMTServiceImpl implements IMTService {
@@ -556,7 +557,7 @@ public class IMTServiceImpl implements IMTService {
 
     public JSONObject reservation(IUser iUser, String itemId, String shopId) {
 
-        
+        Random random = new Random();
         // 生成随机秒数 
         int randomSecond = random.nextInt(60);
         Thread.sleep(randomSecond*1000);
