@@ -219,9 +219,16 @@ public class IMTServiceImpl implements IMTService {
             @Override
             public void run() {
                 String logContent = "";
-                //sleep 10秒
+                //sleep 15秒
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(15000);
+
+                    //15秒也许不够再加点延时
+                    Random random = new Random();
+                    // 生成随机秒数 
+                    int randomSecond = random.nextInt(20);
+                    Thread.sleep(randomSecond*1000);
+                    
                     //预约后领取耐力值
                     String energyAward = getEnergyAward(iUser);
                     logContent += "[申购耐力值]:" + energyAward;
@@ -476,6 +483,21 @@ public class IMTServiceImpl implements IMTService {
         for (IUser iUser : iUsers) {
             logger.info("「开始预约用户」" + iUser.getMobile());
             //预约
+
+            //随机延时
+            try{
+                Random random = new Random();
+                // 生成随机秒数 
+                int randomSecond = random.nextInt(60);
+                Thread.sleep(randomSecond*1000);
+
+                // 生成随机毫秒数 
+                int randomMillisecond = random.nextInt(1000);       
+                Thread.sleep(randomMillisecond);
+            }catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
             reservation(iUser);
             //延时3秒
             try {
