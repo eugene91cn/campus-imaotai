@@ -520,6 +520,17 @@ public class IMTServiceImpl implements IMTService {
 
             for (IUser iUser : iUsers) {
                 logger.info("「开始获得旅行奖励」" + iUser.getMobile());
+
+                //随机延时
+                try{
+                    Random random = new Random();
+                    // 生成随机秒数 
+                    int randomSecond = random.nextInt(60)+10;
+                    Thread.sleep(randomSecond*1000);
+                }catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
                 getTravelReward(iUser);
                 //延时3秒
                 TimeUnit.SECONDS.sleep(3);
